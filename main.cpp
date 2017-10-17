@@ -10,16 +10,41 @@ Bitmap image;
 vector <vector <Pixel> > bmp;
 Pixel rgb;
 //ask for file name
-image.open("machupicchu.bmp");
-bmp = image.toPixelMatrix();
-//find file size
-cout<<"machupicchu.bmp has been loaded. It is "<<bmp[0].size()<<" pixels wide and"<<bmp.size()<<"pixels high"<<endl;
-//convert file into matrix
-//create loop that goes through the rows and thin one within that goes through the colomns
-//change each pixel to grey by averaging the values of the rgb color
-//end loop once it goes through all rows and colomns
-//save as oldtimey.bmp
+std::string pic;
+cout<<"Enter the name of the file you want to convert"<<endl;
+cin>>pic;
 
+image.open(pic);
+bool validBmp = image.isImage();
+
+if( validBmp == true)
+{
+    bmp = image.toPixelMatrix();
+
+
+
+for(int row=0; row < bmp.size(); row++)
+{
+    for(int col=0; col < bmp[row].size(); col++)
+    {
+    rgb=bmp[row][col];
+    float r=rgb.red;
+    float b=rgb.blue;
+    float g=rgb.green;
+
+    float grey=((r+b+g)/3);
+
+    rgb.red=grey;
+    rgb.blue=grey;
+    rgb.green=grey;
+    
+    rgb=bmp[row][col];
+    image.fromPixelMatrix(bmp);
+    cout<<rgb.red<<rgb.blue<<rgb.green<<endl;
+    }
+}
+image.save("oldtimey.bmp");
+}
 
 
     return 0;
