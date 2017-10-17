@@ -40,7 +40,6 @@ for(int row=0; row < bmp.size(); row++)
     
     rgb=bmp[row][col];
     image.fromPixelMatrix(bmp);
-    cout<<rgb.red<<rgb.blue<<rgb.green<<endl;
     }
 }
 image.save("oldtimey.bmp");
